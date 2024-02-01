@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Reservation } from '../models/reservation';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -9,14 +10,17 @@ import { Observable } from 'rxjs';
 export class ReservationService {
   private reservations: Reservation[] = [];
 
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = environment.apiBaseUrl;
 
   constructor(private httpClient: HttpClient) {}
 
   // CRUD
 
   getReservations(): Observable<Reservation[]> {
-    return this.httpClient.get<Reservation[]>(`${this.apiUrl}/reservations`);
+      console.log(this.apiUrl);
+    return this.httpClient.get<Reservation[]>(
+      `${this.apiUrl}/reservations/get-reservations`
+    );
   }
 
   getReservation(id: string): Observable<Reservation> {
@@ -25,7 +29,7 @@ export class ReservationService {
 
   addReservation(reservation: Reservation): Observable<void> {
     return this.httpClient.post<void>(
-      `${this.apiUrl}/reservation`,
+      `${this.apiUrl}/reservations/create-reservation`,
       reservation
     );
   }

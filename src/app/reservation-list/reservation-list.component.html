@@ -18,8 +18,8 @@
             <td>{{reservation.guestName}}</td>
             <td>{{reservation.guestEmail}}</td>
             <td>{{reservation.roomNumber}}</td>
-            <td> {{reservation.checkInDate}} </td>
-            <td>{{reservation.checkOutDate}}</td>
+            <td> {{reservation.checkInDate | date:'medium'}} </td>
+            <td>{{reservation.checkOutDate | date:'medium'}}</td>
             <td>
                 <button class="btn btn-sm btn-danger mx-1" (click)="deleteReservation(reservation.id)">Delete</button>
                 <button class="btn btn-sm btn-secondary mx-1" [routerLink]="['/edit', reservation.id]">Edit</button>
@@ -35,4 +35,11 @@
 <ng-template #noReservation>
     <p>No reservation available.</p>
 </ng-template>
+
+<!-- 
+'short': 6/15/21, 3:30 PM
+'medium': Jun 15, 2021, 3:30:00 PM
+'long': June 15, 2021 at 3:30:00 PM GMT+2
+'full': Tuesday, June 15, 2021 at 3:30:00 PM GMT+02:00 
+-->
 
