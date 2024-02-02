@@ -17,14 +17,15 @@ export class ReservationService {
   // CRUD
 
   getReservations(): Observable<Reservation[]> {
-    console.log(this.apiUrl);
     return this.httpClient.get<Reservation[]>(
       `${this.apiUrl}/reservations/get-reservations`
     );
   }
 
-  getReservation(id: string): Observable<Reservation> {
-    return this.httpClient.get<Reservation>(`${this.apiUrl}/reservation/${id}`);
+  getReservation(reservationUUID: string): Observable<Reservation> {
+    return this.httpClient.get<Reservation>(
+      `${this.apiUrl}/reservations/get-reservation/${reservationUUID}`
+    );
   }
 
   addReservation(reservation: Reservation): Observable<Reservation> {
@@ -41,11 +42,11 @@ export class ReservationService {
   }
 
   updateReservation(
-    id: string,
+    reservationUUID: string,
     updatedReservation: Reservation
   ): Observable<void> {
-    return this.httpClient.put<void>(
-      `${this.apiUrl}/reservation/${id}`,
+    return this.httpClient.patch<void>(
+      `${this.apiUrl}/reservations/update-reservation/${reservationUUID}`,
       updatedReservation
     );
   }
