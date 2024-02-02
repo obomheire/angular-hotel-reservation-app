@@ -17,7 +17,7 @@ export class ReservationService {
   // CRUD
 
   getReservations(): Observable<Reservation[]> {
-      console.log(this.apiUrl);
+    console.log(this.apiUrl);
     return this.httpClient.get<Reservation[]>(
       `${this.apiUrl}/reservations/get-reservations`
     );
@@ -27,15 +27,17 @@ export class ReservationService {
     return this.httpClient.get<Reservation>(`${this.apiUrl}/reservation/${id}`);
   }
 
-  addReservation(reservation: Reservation): Observable<void> {
-    return this.httpClient.post<void>(
+  addReservation(reservation: Reservation): Observable<Reservation> {
+    return this.httpClient.post<Reservation>(
       `${this.apiUrl}/reservations/create-reservation`,
       reservation
     );
   }
 
-  deleteReservation(id: string): Observable<void> {
-    return this.httpClient.delete<void>(`${this.apiUrl}/reservation/${id}`);
+  deleteReservation(reservationUUID: string): Observable<Reservation> {
+    return this.httpClient.delete<Reservation>(
+      `${this.apiUrl}/reservations/delete-reservation/${reservationUUID}`
+    );
   }
 
   updateReservation(

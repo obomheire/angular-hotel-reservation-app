@@ -18,9 +18,11 @@ export class ReservationListComponent implements OnInit {
     });
   }
 
-  deleteReservation(id: string) {
-    this.reservationService.deleteReservation(id).subscribe(() => {
-      console.log('Delete request got processed');
-    });
+  deleteReservation(reservationUUID: string) {
+    this.reservationService
+      .deleteReservation(reservationUUID)
+      .subscribe((reservation) => {
+        console.log(reservation);
+      });
   }
 }

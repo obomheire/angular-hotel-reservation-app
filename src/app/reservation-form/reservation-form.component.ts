@@ -52,9 +52,11 @@ export class ReservationFormComponent implements OnInit {
           });
       } else {
         // New
-        this.reservationService.addReservation(reservation).subscribe(() => {
-          console.log('Create request processed');
-        });
+        this.reservationService
+          .addReservation(reservation)
+          .subscribe((reservation) => {
+            console.log(reservation);
+          });
       }
 
       this.router.navigate(['/list']);
